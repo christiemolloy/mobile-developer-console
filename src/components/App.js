@@ -65,9 +65,9 @@ class App extends React.Component {
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
-          </ToolbarGroup>
-        </Toolbar>
-      );
+        </ToolbarGroup>
+      </Toolbar>
+    );
 
     return (
       <Router>
