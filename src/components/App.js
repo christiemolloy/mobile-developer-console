@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Redirect, Route, Link, NavLink } from 'react-router-dom';
-import { Brand, Page, Nav, NavList, NavItem, NavVariants, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
+import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import { Brand, Page, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
 import Overview from '../containers/Overview';
 import Client from '../containers/Client';
 import ErrorMessages from '../containers/ErrorMessages';
@@ -14,39 +14,33 @@ class App extends React.Component {
     isDropdownOpen: false,
     isIconOpen: false
   };
-  
+
   componentWillMount() {
     this.props.fetchUserInfo();
-  }
+  };
 
   onDropdownToggle = () => {
     this.setState({isDropdownOpen: !this.state.isDropdownOpen});
-  }
+  };
 
   onIconToggle = () => {
     this.setState({isIconOpen: !this.state.isIconOpen});
-  }
+  };
 
   render() {
-    const PageNav = (
-      <Nav aria-label="Nav">
-        <NavList variant={NavVariants.horizontal}>
-          <NavItem>
-            <NavLink activeClassName="pf-m-current" to="/overview">Mobile Apps</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink activeClassName="pf-m-current" to="/">SDK Configuration</NavLink>
-          </NavItem>
-        </NavList>
-      </Nav>
-    );
-
     const userDropdownItems = [
-      <DropdownItem><a href="/oauth/sign_in">Logout</a></DropdownItem>,
+      <DropdownItem>
+        <a href="/oauth/sign_in">
+          Logout
+        </a>
+      </DropdownItem>,
     ];
 
     const questionIconItems = [
-      <DropdownItem><a href="https://docs.aerogear.org/aerogear/latest/getting-started.html">Documentation</a></DropdownItem>,
+      <DropdownItem>
+        <a href="https://docs.aerogear.org/aerogear/latest/getting-started.html">
+          Documentation
+        </a></DropdownItem>,
       <DropdownItem><a href="/">About</a></DropdownItem>
     ];
 
@@ -71,9 +65,9 @@ class App extends React.Component {
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
-        </ToolbarGroup>
-      </Toolbar>
-    );
+          </ToolbarGroup>
+        </Toolbar>
+      );
 
     return (
       <Router>
@@ -81,7 +75,6 @@ class App extends React.Component {
         <Page
           header={<PageHeader
             logo={<Brand src="/img/logo.svg" alt="Mobile Developer Console Logo" />}
-            topNav={PageNav}
             toolbar={PageToolbar}
           />}
           >
