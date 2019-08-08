@@ -1,12 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
-import { Brand, Page, PageHeader, PageSection, Toolbar, ToolbarGroup, ToolbarItem, DropdownToggle, Dropdown, DropdownItem } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import {
+  Brand,
+  Page,
+  PageHeader,
+  PageSection,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem,
+  DropdownToggle,
+  Dropdown,
+  DropdownItem
+} from '@patternfly/react-core';
 import Overview from '../containers/Overview';
 import Client from '../containers/Client';
 import ErrorMessages from '../containers/ErrorMessages';
 import { fetchUserInfo } from '../actions/users';
-import { OutlinedQuestionCircleIcon  } from '@patternfly/react-icons';
 import './App.css';
 
 class App extends React.Component {
@@ -17,43 +28,46 @@ class App extends React.Component {
 
   componentWillMount() {
     this.props.fetchUserInfo();
-  };
+  }
 
   onDropdownToggle = () => {
-    this.setState({isDropdownOpen: !this.state.isDropdownOpen});
+    this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
   };
 
   onIconToggle = () => {
-    this.setState({isIconOpen: !this.state.isIconOpen});
+    this.setState({ isIconOpen: !this.state.isIconOpen });
   };
 
   render() {
     const userDropdownItems = [
       <DropdownItem>
-        <a href="/oauth/sign_in">
-          Logout
-        </a>
-      </DropdownItem>,
+        <a href="/oauth/sign_in">Logout</a>
+      </DropdownItem>
     ];
 
     const questionIconItems = [
       <DropdownItem>
-        <a href="https://docs.aerogear.org/aerogear/latest/getting-started.html">
-          Documentation
-        </a></DropdownItem>,
-      <DropdownItem><a href="/">About</a></DropdownItem>
+        <a href="https://docs.aerogear.org/aerogear/latest/getting-started.html">Documentation</a>
+      </DropdownItem>,
+      <DropdownItem>
+        <a href="/">About</a>
+      </DropdownItem>
     ];
 
     const PageToolbar = (
       <Toolbar>
         <ToolbarGroup>
           <ToolbarItem>
-            <Dropdown 
+            <Dropdown
               isPlain
               position="right"
               isOpen={this.state.isIconOpen}
               onSelect={this.onDropdownSelect}
-              toggle={<DropdownToggle onToggle={this.onIconToggle} iconComponent={null}><OutlinedQuestionCircleIcon /></DropdownToggle>}
+              toggle={
+                <DropdownToggle onToggle={this.onIconToggle} iconComponent={null}>
+                  <OutlinedQuestionCircleIcon />
+                </DropdownToggle>
+              }
               dropdownItems={questionIconItems}
             />
             <Dropdown
@@ -61,7 +75,11 @@ class App extends React.Component {
               position="right"
               isOpen={this.state.isDropdownOpen}
               onSelect={this.onDropdownSelect}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>{this.props.user ? this.props.user.name : 'Unknown'}</DropdownToggle>}
+              toggle={
+                <DropdownToggle onToggle={this.onDropdownToggle}>
+                  {this.props.user ? this.props.user.name : 'Unknown'}
+                </DropdownToggle>
+              }
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
@@ -73,11 +91,13 @@ class App extends React.Component {
       <Router>
         <ErrorMessages />
         <Page
-          header={<PageHeader
-            logo={<Brand src="/img/logo.svg" alt="Mobile Developer Console Logo" />}
-            toolbar={PageToolbar}
-          />}
-          >
+          header={
+            <PageHeader
+              logo={<Brand src="/img/logo.svg" alt="Mobile Developer Console Logo" />}
+              toolbar={PageToolbar}
+            />
+          }
+        >
           <PageSection>
             <Switch>
               <Route exact path="/overview" component={Overview} />
@@ -90,7 +110,7 @@ class App extends React.Component {
       </Router>
     );
   }
-};
+}
 
 function mapStateToProps(state) {
   return {
