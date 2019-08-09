@@ -48,9 +48,6 @@ class App extends React.Component {
     const questionIconItems = [
       <DropdownItem>
         <a href="https://docs.aerogear.org/aerogear/latest/getting-started.html">Documentation</a>
-      </DropdownItem>,
-      <DropdownItem>
-        <a href="/">About</a>
       </DropdownItem>
     ];
 
