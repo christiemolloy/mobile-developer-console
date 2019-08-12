@@ -90,7 +90,7 @@ class App extends React.Component {
         <Page
           header={
             <PageHeader
-              logo={<Brand src="/img/logo.svg" alt="Mobile Developer Console Logo" style={{ width: '300px' }} />}
+              logo={<Brand src="/img/aerogear_logo.svg" alt="Mobile Developer Console Logo" style={{ width: '150px' }}/>}
               toolbar={PageToolbar}
             />
           }
