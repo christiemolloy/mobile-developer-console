@@ -39,7 +39,6 @@ class DeleteItemButton extends Component {
   };
 
   openDialog = () => {
-    console.log("did it make it here");
     this.setState({
       showModal: true
     });
@@ -58,40 +57,37 @@ class DeleteItemButton extends Component {
   render() {
     const { itemType, title = 'Delete' } = this.props;
     const itemName = this.getItemName();
-    const { showModal }  = this.state;
-    console.log( showModal );
-
+    const { showModal } = this.state;
     return (
       <Route
         render={props => (
           <React.Fragment>
             <DropdownItem key="action">
-              <button onClick={() => this.openDialog}>
-                {title}
-              </button>
-              </DropdownItem>
-              <Modal
-                title="Confirm Delete"
-                isOpen={ showModal }
-                onClose={this.handleDialogClose}
-                actions={[
-                  <Button key="Delete" variant="danger" onClick={() => this.triggerDeletion(props.history)}>
-                    Delete
-                  </Button>,
-                  <Button key="Cancel" variant="secondary" onClick={this.handleDialogClose}>
-                    Cancel
-                  </Button>
-                ]}>
-                  <p>
-                    {`Are you sure you want to delete the ${itemType} '`}
-                    <b>{itemName}</b>
-                    {`'?`}
-                  </p>
-                  <p>
-                    {itemName} and its data will no longer be available. <b>It cannot be undone.</b> Make sure this is
-                    something you really want to do!
-                  </p>
-              </Modal>
+              <button onClick={() => this.openDialog}>{title}</button>
+            </DropdownItem>
+            <Modal
+              title="Confirm Delete"
+              isOpen={showModal}
+              onClose={this.handleDialogClose}
+              actions={[
+                <Button key="Delete" variant="danger" onClick={() => this.triggerDeletion(props.history)}>
+                  Delete
+                </Button>,
+                <Button key="Cancel" variant="secondary" onClick={this.handleDialogClose}>
+                  Cancel
+                </Button>
+              ]}
+            >
+              <p>
+                {`Are you sure you want to delete the ${itemType} '`}
+                <b>{itemName}</b>
+                {`'?`}
+              </p>
+              <p>
+                {itemName} and its data will no longer be available. <b>It cannot be undone.</b> Make sure this is
+                something you really want to do!
+              </p>
+            </Modal>
           </React.Fragment>
         )}
       />
