@@ -28,17 +28,20 @@ const setup = (propOverrides = {}) => {
 };
 
 describe('Binding operation not in progress', () => {
-  const { wrapper } = setup();
-  xit('should render component', () => {
-    expect(wrapper.find('Button').contains('Bind to App')).toEqual(true);
+  //const { wrapper } = setup();
+  it('should render component', () => {
+    const wrapper = shallow(<BindButton appName="job-11010" service={{isBindingOperationInProgress: () => false}} onClick={jest.fn()}/>);
+    expect(wrapper.find('Button')).toHaveLength(1);
+    //expect(wrapper.find('Button').contains('Create a binding')).toEqual(true);
   });
 });
 
 describe('onClick()', () => {
   const { wrapper } = setup();
 
-  xit('should press button', () => {
+  it('should press button', () => {
     const saveButton = wrapper.find('Button');
+
     expect(saveButton.simulate('click')).toHaveLength(1);
   });
 });
